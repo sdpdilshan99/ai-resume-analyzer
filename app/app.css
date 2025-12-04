@@ -2,6 +2,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+:root {
+  --beige-gray: #b6b4ac;
+  --black: #000000;
+  --light-blue: #8FABD4;
+}
+
+
 @theme {
   --font-sans: "Mona Sans", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -16,6 +23,8 @@
   --color-badge-green-text: #254d4a;
   --color-badge-red-text: #752522;
   --color-badge-yellow-text: #73321b;
+
+  
 }
 
 html,
@@ -121,7 +130,7 @@ form {
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#c8c5bc] via-[#000000] to-[#8FABD4]; 
 }
 
 @utility gradient-hover {
