@@ -115,6 +115,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
       },
     });
   };
+  
 
   const checkAuthStatus = async (): Promise<boolean> => {
     const puter = getPuter();

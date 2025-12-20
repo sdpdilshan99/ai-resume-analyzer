@@ -7,52 +7,33 @@ interface Job {
 
 interface Resume {
   id: string;
+  user_id: string;
   companyName?: string;
   jobTitle?: string;
+  job : Job[]
   imagePath: string;
+  imagePath2 ?: string;
   resumePath: string;
   feedback: Feedback;
+  createdAt : string;
+}
+
+interface FeedbackTip {
+  type: "good" | "improve";
+  tip: string;
+  explanation: string;
+}
+
+interface FeedbackCategory {
+  score: number;
+  tips: FeedbackTip[];
 }
 
 interface Feedback {
   overallScore: number;
-  ATS: {
-    score: number;
-    tips: {
-      type: "good" | "improve";
-      tip: string;
-    }[];
-  };
-  toneAndStyle: {
-    score: number;
-    tips: {
-      type: "good" | "improve";
-      tip: string;
-      explanation: string;
-    }[];
-  };
-  content: {
-    score: number;
-    tips: {
-      type: "good" | "improve";
-      tip: string;
-      explanation: string;
-    }[];
-  };
-  structure: {
-    score: number;
-    tips: {
-      type: "good" | "improve";
-      tip: string;
-      explanation: string;
-    }[];
-  };
-  skills: {
-    score: number;
-    tips: {
-      type: "good" | "improve";
-      tip: string;
-      explanation: string;
-    }[];
-  };
+  ATS : FeedbackCategory;
+  toneAndStyle: FeedbackCategory;
+  content: FeedbackCategory;
+  structure: FeedbackCategory;
+  skills: FeedbackCategory;
 }

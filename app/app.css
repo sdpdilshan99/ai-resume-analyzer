@@ -33,25 +33,25 @@ body {
 }
 
 main {
-  @apply min-h-screen pt-10;
+  @apply min-h-screen pt-10 px-2;
 }
 h1 {
-  @apply max-sm:text-[3rem] text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
+  @apply max-sm:text-[2rem] text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
 }
 
 h2 {
-  @apply max-sm:text-xl text-3xl text-dark-200;
+  @apply max-sm:text-lg text-3xl text-dark-200;
 }
 
 label {
   @apply text-dark-200;
 }
 input {
-  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white;
+  @apply w-full p-4 inset-shadow rounded-lg focus:outline-none bg-white;
 }
 
 textarea {
-  @apply w-full p-4 inset-shadow rounded-2xl focus:outline-none bg-white;
+  @apply w-full p-4 inset-shadow rounded-lg focus:outline-none bg-white;
 }
 
 form {
@@ -66,7 +66,7 @@ form {
     @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
   }
   .primary-button {
-    @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
+    @apply primary-gradient text-white rounded-full px-6 py-2 cursor-pointer w-full hover:primary-gradient-opasite transition-all duration-200 active:scale-95;
   }
   .resume-nav {
     @apply flex flex-row justify-between items-center p-4 border-b border-gray-200;
@@ -84,7 +84,7 @@ form {
     @apply primary-gradient rounded-full py-4 px-8 cursor-pointer w-[600px] max-md:w-full text-3xl font-semibold text-white;
   }
   .main-section {
-    @apply flex flex-col items-center gap-8 pt-12 max-sm:mx-2 mx-15 pb-5;
+    @apply flex flex-col items-center gap-8 py-8 max-sm:mx-8 mx-15 pb-5 ;
   }
   .page-heading {
     @apply flex flex-col items-center gap-8 max-w-4xl text-center max-sm:gap-4;
@@ -106,7 +106,7 @@ form {
   }
 
   .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
+    @apply flex flex-row justify-between items-center bg-gray-100 rounded-full p-2 sm:p-2 w-full px-3 sm:px-2 sm:pl-4 max-w-[1200px] mx-auto;
   }
 
   .score-badge {
@@ -123,6 +123,13 @@ form {
   .uploader-selected-file {
     @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
   }
+  .uploader-section {
+    @apply flex flex-col items-center justify-center w-full rounded-lg pt-4
+                cursor-pointer  gap-1 hover:border-gray-600 hover:text-red-400 transition-all duration-200
+  }
+  .remove-file-button {
+    @apply flex justify-center items-center w-[25px] h-[25px] bg-gray-400 rounded-full cursor-pointer opacity-90
+  }
 }
 
 @utility bg-gradient {
@@ -138,7 +145,12 @@ form {
 }
 
 @utility primary-gradient {
-  background: linear-gradient(to bottom, #8e98ff, #606beb);
+  background: linear-gradient(to bottom, #8FABD4, #4A70A9);
+  box-shadow: 0px 74px 21px 0px #6678ef00;
+}
+
+@utility primary-gradient-opasite {
+  background: linear-gradient(to top, #8FABD4, #4A70A9);
   box-shadow: 0px 74px 21px 0px #6678ef00;
 }
 
@@ -159,3 +171,4 @@ form {
     opacity: 1;
   }
 }
+

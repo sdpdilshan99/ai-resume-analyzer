@@ -9,8 +9,9 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { usePuterStore } from "./lib/puter";
 import { useEffect } from "react";
+import { useAuthStore } from "./lib/auth-store";
+import { supabase } from "./lib/supabase";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -26,11 +27,21 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const {init} = usePuterStore();
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
-    init()
-  },[init])
+    //check if there already user logged
+    supabase.auth.getSession().then(({data: {session}}) => {
+      setUser(session?.user ?? null);
+    });
+
+    const {data: {subscription}} = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ??  null);
+      console.log("Auth state changed! User is:" , session?.user?.email);
+    });
+
+    return () => subscription.unsubscribe();
+  },[setUser])
 
   return (
     <html lang="en">

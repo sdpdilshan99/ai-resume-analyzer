@@ -1,19 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router'
 import ScoreCircle from './ScoreCircle'
+import { getPublicUrl } from '~/lib/utils'
 
-const ResumeCard = ({resume: {id, companyName, jobTitle, feedback, imagePath}}: {resume: Resume}) => {
+const ResumeCard = ({resume}: {resume: any}) => {
+  const { id, company_name, job_title, feedback, image_url } = resume;
   return (
-    <Link to={`/resume/${id}`} className='resume-card animate-in fade-in duration-300'>
+    <Link to={`/resume/${id}`} className='resume-card animate-in fade-in duration-300 h-180 relative'>
 
-      <div className="resume-card-header">
+      <div className="resume-card-header ">
         <div className="flex flex-col gap-2">
           <h2 className="!text-black font-bold break-words">
-            {companyName ?? "Unknown Company"}
+            {company_name ?? "Unknown Company"}
           </h2>
 
           <h3 className="text-lg break-words text-gray-500">
-            {jobTitle ?? "Unknown Job Title"}
+            {job_title ?? "Unknown Job Title"}
           </h3>
         </div>
 
@@ -23,8 +25,8 @@ const ResumeCard = ({resume: {id, companyName, jobTitle, feedback, imagePath}}: 
       </div>
 
       <div className="gradient-border animate-in fade-in duration-300">
-        <div className="w-full h-hull">
-          <img src={imagePath} alt="resume cv" className='w-full h-[350px] max-sm:h-[200px] object-cover object-top'/>
+        <div className="w-full ">
+          <img src={getPublicUrl(image_url)} alt="resume cv" className='w-full h-130 object-cover object-top'/>
         </div>
       </div>
     </Link>
