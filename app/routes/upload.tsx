@@ -81,18 +81,21 @@ const Upload = () => {
                     image_url: imgPath1,      // Primary Page
                     image_url_2: imgPath2,    // Optional Second Page
                     resume_path: filePath
-                }]);
+                }]).select();
                 
             if (dbError) throw dbError;
             console.log( data)
             updateStatus("Analysis complete!", "Redirecting to your dashboard...");
             setTimeout(() => navigate(`/`), 1000); 
+
+            navigate(`/results/${uuid}`)
             
         } catch (error: any) {
             console.error("Pipeline Error:", error);
             alert(error.message || "Something went wrong...");
             setIsProcessing(false);
         }
+         
     }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -104,6 +107,8 @@ const Upload = () => {
 
         if (!file) return;
         handleAnalyze({ companyName, jobTitle, jobDescription, file });
+
+        
     }
 
     return (

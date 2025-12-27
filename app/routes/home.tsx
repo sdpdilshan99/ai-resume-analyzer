@@ -5,6 +5,7 @@ import { useAuthStore } from "~/lib/auth-store"; // New Real World Store
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "~/lib/supabase"; // New Supabase Client
+import { resumes } from "~/constants";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -47,6 +48,9 @@ export default function Home() {
     if (user) getMyResumes();
   }, [user]);
 
+  
+
+
   return (
     <main className="bg-[url('/images/bg-main.svg')] bg-cover min-h-screen">
       <Navbar />
@@ -63,7 +67,7 @@ export default function Home() {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-blue-500"></div>
           </div>
         ) : (
-          <div className="resumes-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="resumes-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {dbResumes.length > 0 ? (
               dbResumes.map((resume) => (
                 <ResumeCard key={resume.id} resume={resume} />

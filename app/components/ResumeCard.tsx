@@ -6,7 +6,7 @@ import { getPublicUrl } from '~/lib/utils'
 const ResumeCard = ({resume}: {resume: any}) => {
   const { id, company_name, job_title, feedback, image_url } = resume;
   return (
-    <Link to={`/resume/${id}`} className='resume-card animate-in fade-in duration-300 h-180 relative'>
+    <Link to={`/results/${id}`} className='resume-card animate-in fade-in duration-300 h-full w-full relative'>
 
       <div className="resume-card-header ">
         <div className="flex flex-col gap-2">
@@ -26,7 +26,7 @@ const ResumeCard = ({resume}: {resume: any}) => {
 
       <div className="gradient-border animate-in fade-in duration-300">
         <div className="w-full ">
-          <img src={getPublicUrl(image_url)} alt="resume cv" className='w-full h-130 object-cover object-top'/>
+          <img src={getPublicUrl(image_url)} alt="resume cv" className='w-full h-100 object-cover object-top'/>
         </div>
       </div>
     </Link>
