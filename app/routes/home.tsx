@@ -5,7 +5,7 @@ import { useAuthStore } from "~/lib/auth-store"; // New Real World Store
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "~/lib/supabase"; // New Supabase Client
-import { resumes } from "~/constants";
+import DeleteModal from "~/components/DeleteModal";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,6 +21,10 @@ export default function Home() {
   // State to hold real resumes from the database
   const [dbResumes, setDbResumes] = useState<any[]>([]);
   const [dataLoading, setDataLoading] = useState(true);
+
+  // Modal State
+  const [deleteTarget, setDeleteTarget] = useState<any>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // 1. Protect the Route
   useEffect(() => {
@@ -48,7 +52,24 @@ export default function Home() {
     if (user) getMyResumes();
   }, [user]);
 
-  
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setIsDeleting(true);
+    try {
+      await supabase.from('resumes').delete().eq('id', deleteTarget.id);
+      await Promise.all([
+        supabase.storage.from('previews').remove([deleteTarget.image_url]),
+        supabase.storage.from('resumes').remove([deleteTarget.resume_path])
+      ]);
+      setDbResumes(prev => prev.filter(r => r.id !== deleteTarget.id));
+      setDeleteTarget(null);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
 
   return (
@@ -70,7 +91,7 @@ export default function Home() {
           <div className="resumes-section grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {dbResumes.length > 0 ? (
               dbResumes.map((resume) => (
-                <ResumeCard key={resume.id} resume={resume} />
+                <ResumeCard key={resume.id} resume={resume} onDeleteClick={() => setDeleteTarget(resume)} />
               ))
             ) : (
               <div className="col-span-full text-center py-10 bg-white/50 rounded-xl border-2 border-dashed border-gray-300">
@@ -86,6 +107,18 @@ export default function Home() {
           </div>
         )}
       </section>
+
+      <DeleteModal 
+        isOpen={!!deleteTarget} 
+        itemName={deleteTarget?.company_name || "this analysis"}
+        isLoading={isDeleting}
+        onClose={() => setDeleteTarget(null)}
+        onConfirm={confirmDelete}
+      />
     </main>
   );
+}
+
+function setPreviewResume(arg0: (prev: any) => any) {
+  throw new Error("Function not implemented.");
 }

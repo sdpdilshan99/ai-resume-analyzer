@@ -2,10 +2,20 @@ import React from 'react'
 import { Link } from 'react-router'
 import ScoreCircle from './ScoreCircle'
 import { getPublicUrl } from '~/lib/utils'
+import { Trash2 } from 'lucide-react'
 
-const ResumeCard = ({resume}: {resume: any}) => {
+const ResumeCard = ({resume, onDeleteClick}: {resume: any , onDeleteClick: () => void}) => {
   const { id, company_name, job_title, feedback, image_url } = resume;
   return (
+    <div className="relative group">
+
+      <button 
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDeleteClick(); }}
+        className="absolute top-4 right-4 z-20 p-2.5 bg-white/80 backdrop-blur-md text-red-500 rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white shadow-xl border border-slate-200"
+      >
+        <Trash2 size={18} />
+      </button>
+
     <Link to={`/results/${id}`} className='resume-card animate-in fade-in duration-300 h-full w-full relative'>
 
       <div className="resume-card-header ">
@@ -30,6 +40,8 @@ const ResumeCard = ({resume}: {resume: any}) => {
         </div>
       </div>
     </Link>
+    </div>
+
   )
 }
 

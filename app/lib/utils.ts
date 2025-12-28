@@ -1,4 +1,6 @@
 import { supabase } from "./supabase";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export const generateUUID = (): string => {
     return crypto.randomUUID();
@@ -18,3 +20,7 @@ export const getPublicUrl = (path: string | null | undefined) => {
   
   return data.publicUrl;
 };
+
+export function cn(...inputs: ClassValue[]){
+  return twMerge(clsx(inputs))
+}

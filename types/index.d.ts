@@ -37,3 +37,4 @@ interface Feedback {
   structure: FeedbackCategory;
   skills: FeedbackCategory;
 }
+
