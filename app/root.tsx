@@ -53,7 +53,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         
       </head>
       <body>
-        <script src="https://js.puter.com/v2/"></script>
         
 
         {children}

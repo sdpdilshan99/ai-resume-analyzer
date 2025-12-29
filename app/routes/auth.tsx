@@ -14,6 +14,7 @@ const Auth = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+
     // Local States
     const [email, setEmail] = useState('');
     const [isEmailSent, setIsEmailSent] = useState(false);
@@ -22,9 +23,11 @@ const Auth = () => {
     const searchParams = new URLSearchParams(location.search);
     const next = searchParams.get('next') || '/';
 
+
     useEffect(() => {
-        if (user) navigate(next);
-    }, [user, next, navigate]);
+    if (!isLoading && user) navigate(next);
+    }, [user, isLoading, next, navigate]);
+
 
     // Handle Email Login/Sign Up
     const handleEmailAuth = async (e: React.FormEvent) => {
@@ -49,7 +52,7 @@ const Auth = () => {
     const handleGoogleSignIn = async () => {
         await supabase.auth.signInWithOAuth({
             provider: 'google',
-            options: { redirectTo: window.location.origin },
+            options: { redirectTo: `${window.location.origin}?next=${encodeURIComponent(next)}` },
         })
     }
 

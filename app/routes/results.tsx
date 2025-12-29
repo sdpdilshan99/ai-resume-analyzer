@@ -120,7 +120,7 @@ const Results = () => {
                         <div className="sticky top-24 space-y-4">
                             <div className="bg-slate-50 rounded-2xl p-2 border border-slate-200/60 shadow-sm overflow-hidden">
                                 <img 
-                                    src={imageUrl || '/images/placeholder.jpg'} 
+                                    src={imageUrl} 
                                     alt="Resume Preview" 
                                     className="w-full h-auto rounded-xl shadow-inner transition-opacity duration-500 opacity-60"
                                     onLoad={(e) => (e.currentTarget.style.opacity = '1')}

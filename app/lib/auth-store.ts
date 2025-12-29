@@ -18,3 +18,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ user: null });
   },
 }));
+
+supabase.auth.onAuthStateChange((_event, session) => {
+  useAuthStore.getState().setUser(session?.user ?? null);
+});
