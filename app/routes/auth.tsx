@@ -59,13 +59,13 @@ const Auth = () => {
     return (
         <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center justify-center p-4">
             <div className='gradient-border shadow-2xl max-w-xl w-full'>
-                <section className='bg-white rounded-2xl p-30'>
+                <section className='bg-white rounded-2xl p-8 lg:p-30'>
                     
                     {isEmailSent ? (
                         <VerificationMessage email={email} onBack={() => setIsEmailSent(false)} />
                     ) : (
-                        <div className="flex flex-col gap-8">
-                            <div className="text-center">
+                        <div className="flex flex-col gap-8 w-full">
+                            <div className="text-center w-full">
                                 <h1 className="text-3xl font-bold text-gray-900">Welcome</h1>
                                 <p className="text-gray-500 mt-2">Sign in to boost your career</p>
                             </div>
@@ -81,7 +81,7 @@ const Auth = () => {
                                 />
                                 <button 
                                     disabled={loading}
-                                    className="auth-button text-xl w-full text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-all disabled:opacity-50"
+                                    className="auth-button text-lg lg:text-xl w-full text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-all disabled:opacity-50"
                                 >
                                     {loading ? 'Sending...' : 'Continue with Email'}
                                 </button>
